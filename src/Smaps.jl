@@ -2,7 +2,7 @@ module Smaps
 
 using DataFrames
 
-function summary(pid = getpid(); sortby = :Size)
+function summary(;pid = getpid(), sortby = :Size)
     df = DataFrame(
         mem_area = String[],
         Size = Int[],

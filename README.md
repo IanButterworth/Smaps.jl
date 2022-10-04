@@ -5,5 +5,5 @@
  ```julia
  julia> using Smaps
 
- julia> Smaps.summary(pid = getpid(); sortby = :Size)
+ julia> Smaps.summary(;pid = getpid(), sortby = :Size)
  ```
