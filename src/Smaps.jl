@@ -2,7 +2,7 @@ module Smaps
 
 using DataFrames
 
-function summary(;pid = getpid(), sortby = :Size)
+function summary(;pid = getpid())
     df = DataFrame(
         mem_area = String[],
         Size = Int[],
@@ -31,7 +31,7 @@ function summary(;pid = getpid(), sortby = :Size)
             start_pos = position(f)
             readline(f)
             row = (
-                mem_area = mem_area,
+                mem_area = join(split(mem_area, " ", keepempty = false), " "),
                 Size = get_kb(f, start_pos, "Size"),
                 KernelPageSize = get_kb(f, start_pos, "KernelPageSize"),
                 MMUPageSize = get_kb(f, start_pos, "MMUPageSize"),
@@ -59,10 +59,16 @@ function summary(;pid = getpid(), sortby = :Size)
             push!(df, row)
         end
     end
+    return df
+end
+
+function print(;pid = getpid(), sortby = :Size)
+    df = summary(;pid)
     if !isnothing(sortby)
         sort!(df, sortby, rev = true)
     end
-    return df
+    show(df, truncate = 1000, allrows=true)
+    nothing
 end
 
 function get_kb(f, start_pos, field)
