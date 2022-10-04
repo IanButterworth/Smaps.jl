@@ -1,0 +1,7 @@
+name = "Smaps"
+uuid = "069843f8-2e4f-4d44-915a-9fb3495e950a"
+authors = ["Ian Butterworth <i.r.butterworth@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
